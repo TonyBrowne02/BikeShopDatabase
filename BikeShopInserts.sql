@@ -1,44 +1,50 @@
--- Suppliers Table
-INSERT INTO suppliers (supplierid, suppliername, contactnumber)
-VALUES
-    (1, 'ABC Bicycle Parts', '123-456-7890'),
-    (2, 'XYZ Bike Supplies', '987-654-3210'),
-    (3, 'Bike World', '555-555-5555'),
-    (4, 'Cycle Pro', '777-888-9999'),
-    (5, 'Fast Bikes', '111-222-3333');
-
--- Bike Parts Table
-INSERT INTO bikeparts (partid, partname, suppliercost, consumerprice, suppliers_supplierid)
-VALUES
-    ('P1', 'Tire', 20.00, 35.00, 1),
-    ('P2', 'Brake Pad', 5.00, 12.00, 2),
-    ('P3', 'Chain', 10.00, 20.00, 1),
-    ('P4', 'Handlebar Grips', 7.50, 15.00, 4),
-    ('P5', 'Pedals', 8.00, 18.00, 3);
-
--- Customers Table
-INSERT INTO customer (customerid, firstname, lastname, phonenumber, email)
-VALUES
-    (1, 'John', 'Smith', '555-1234', 'john.smith@example.com'),
-    (2, 'Alice', 'Johnson', '555-5678', 'alice.johnson@example.com'),
-    (3, 'Robert', 'Williams', '555-9876', 'robert.williams@example.com'),
-    (4, 'Susan', 'Davis', '555-4321', 'susan.davis@example.com'),
-    (5, 'Michael', 'Brown', '555-8765', 'michael.brown@example.com');
-
--- Model Bike Table
-INSERT INTO modelbike (modelid, modelname, suppliers_supplierid, quantityinstock)
-VALUES
-    (1, 'Mountain', 1, 50),
-    (2, 'Road', 2, 30),
-    (3, 'Hybrid', 3, 40),
-    (4, 'Cruiser', 1, 25),
-    (5, 'BMX', 4, 15);
-
--- Customer Bike Table
-INSERT INTO customerbike (serialnumber, repairstatus, repairnumber, repairdescription, customer_customerid, modelbike_modelid)
-VALUES
-    ('SN1', 'A', 'R1234', 'Flat tire', 1, 1),
-    ('SN2', 'R', 'R1235', 'Brake replacement', 2, 2),
-    ('SN3', 'A', 'R1236', 'Chain repair', 3, 1),
-    ('SN4', 'A', 'R1237', 'Handlebar grip replacement', 4, 4),
-    ('SN5', 'R', 'R1238', 'Pedal replacement', 5, 3);
+INSERT INTO suppliers (suppliername, contactnumber) VALUES
+('Supplier 1', '1234567890'),
+('Supplier 2', '9876543210'),
+('Supplier 3', '5555555555'),
+('Supplier 4', '8888888888'),
+('Supplier 5', '7777777777');
+INSERT INTO bikeparts (partid, partname, suppliers_supplierid, bikeparts_partid, partdescription) VALUES
+('BP001', 'Handlebar', 1, NULL, 'Standard handlebar'),
+('BP002', 'Seat', 2, NULL, 'Comfortable seat'),
+('BP003', 'Tire', 1, NULL, 'Highperformance tire'),
+('BP004', 'Brake', 3, NULL, 'Disc brake system'),
+('BP005', 'Pedal', 4, NULL, 'Lightweight pedals');
+INSERT INTO customer (firstname, lastname, phonenumber, email) VALUES
+('John', 'Doe', '5551234', 'john.doe@example.com'),
+('Jane', 'Smith', '5555678', 'jane.smith@example.com'),
+('Bob', 'Johnson', '5559876', NULL),
+('Alice', 'Williams', '5554321', 'alice.w@example.com'),
+('Chris', 'Brown', '5553456', NULL);
+INSERT INTO modelbike (modelname, suppliers_supplierid, quantityinstock) VALUES
+('Mountain Bike', 1, 10),
+('Road Bike', 2, 8),
+('City Bike', 3, 15),
+('Hybrid Bike', 2, 12),
+('BMX Bike', 4, 5);
+INSERT INTO customerbike (serialnumber, repairstatus, repairnumber, customer_customerid, modelbike_modelid, repairdescription) VALUES
+('CB001', 'R', 'R001', 1, 1, 'Wheel replacement'),
+('CB002', 'C', 'R002', 2, 2, 'Tire repair'),
+('CB003', 'R', 'R003', 3, 1, 'Brake maintenance'),
+('CB004', 'R', 'R004', 4, 4, 'Chain replacement'),
+('CB005', 'F', 'R005', 5, 3, 'Seat adjustment');
+-- Sample data for haspart
+INSERT INTO haspart (modelbike_modelid, bikeparts_partid, partquantity) VALUES
+(1, 'BP001', 10),
+(2, 'BP002', 5),
+(3, 'BP003', 12),
+(4, 'BP004', 8),
+(5, 'BP005', 15);
+INSERT INTO repairdetails (customerbike_serialnumber, labourhours, repairdescription) VALUES
+('CB001', 2.5, 'Wheel replacement and alignment'),
+('CB002', 1.2, 'Tire puncture repair'),
+('CB003', 3.0, 'Brake pad replacement'),
+('CB004', 2.8, 'Chain installation and lubrication'),
+('CB005', 1.5, 'Seat height adjustment');
+-- Sample data for usedparts
+INSERT INTO usedparts (repairdetails_repairid, bikeparts_partid, partquantity) VALUES
+(1, 'BP001', 2),
+(2, 'BP003', 4),
+(3, 'BP004', 2),
+(4, 'BP002', 1),
+(5, 'BP005', 3);
