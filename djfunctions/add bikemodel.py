@@ -4,8 +4,8 @@ def insert_new_modelbike(modelname, suppliers_supplierid, quantityinstock):
     try:
         conn = psycopg2.connect(
             dbname="postgres",
-            user="BUILDER",
-            password="Ser1ousPwd",
+            user="owner",
+            password="owner_password",
             host="localhost",
             port="54321"
         )

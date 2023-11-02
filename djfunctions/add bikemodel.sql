@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION insert_new_modelbike(
+CREATE OR REPLACE FUNCTION bicycle_repair_shop.insert_new_modelbike(
     modelname VARCHAR,
     suppliers_supplierid INTEGER,
     quantityinstock INTEGER
@@ -14,3 +14,4 @@ EXCEPTION
         RETURN 'Error: ' || SQLERRM;
 END;
 $$ LANGUAGE plpgsql;
+GRANT EXECUTE ON FUNCTION bicycle_repair_shop.insert_new_modelbike(modelname VARCHAR, suppliers_supplierid INTEGER, quantityinstock INTEGER) TO owner;
