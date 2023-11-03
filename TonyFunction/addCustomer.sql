@@ -19,7 +19,6 @@ $function$;
 CREATE or replace FUNCTION audit_customer() RETURNS trigger AS $audit_customer$
 declare
 	uname varchar(80);
-	supplier_id varchar(80);
 	cdate date;
 BEGIN
 	select user into strict uname;
