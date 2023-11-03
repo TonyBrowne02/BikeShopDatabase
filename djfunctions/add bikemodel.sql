@@ -29,5 +29,5 @@ BEGIN
 END;
 $audit_bike$ LANGUAGE plpgsql;
 
-CREATE or replace TRIGGER audit_bike after INSERT OR UPDATE ON "Bike857A".modelbike
-FOR EACH ROW EXECUTE FUNCTION audit_bike();
+CREATE or replace TRIGGER audit_modelbike after INSERT OR UPDATE ON "Bike857A".modelbike
+FOR EACH ROW EXECUTE FUNCTION audit_modelbike();
