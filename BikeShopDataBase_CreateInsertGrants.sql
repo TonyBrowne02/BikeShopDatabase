@@ -77,7 +77,6 @@ create table customer_log(
 );
 -- Add foreign keys to the tables
 ALTER TABLE bikeparts ADD FOREIGN KEY (suppliers_supplierid) REFERENCES suppliers (supplierid);
-ALTER TABLE bikeparts ADD FOREIGN KEY (bikeparts_partid) REFERENCES bikeparts (partid);
 ALTER TABLE customerbike ADD FOREIGN KEY (customer_customerid) REFERENCES customer (customerid);
 ALTER TABLE customerbike ADD FOREIGN KEY (modelbike_modelid) REFERENCES modelbike (modelid);
 ALTER TABLE haspart ADD FOREIGN KEY (bikeparts_partid) REFERENCES bikeparts (partid);
@@ -169,31 +168,31 @@ INSERT INTO customerbike (repairstatus, repairnumber, customer_customerid, model
 VALUES ('C', 'Repair 005', 5, 5, 'Repair description 5');
 
 --Grants
-CREATE ROLE receptionist;
-CREATE ROLE shop_assistant;
-CREATE ROLE Shopowner;
-CREATE ROLE mechanic;
-CREATE ROLE customer;
+--Grants
+-- CREATE ROLE "C21481174"; Receptionist
+-- CREATE ROLE "C21315413"; ShopOwner
+-- CREATE ROLE "C21403052"; Mechanic
+-- CREATE ROLE "C21403052"; Customer
 
---Tony Function Permissions addCustomer, Receptionist
-GRANT USAGE ON "Bike857A" TO receptionist;
-GRANT execute ON function "Bike857A".addCustomer to receptionist;--must run creation of addCustomer function and audit_customer function and trigger before
-GRANT select on table "Bike857A".customer to receptionist;
-GRANT insert on table "Bike857A".customer to receptionist;
-grant update on sequence customer_customerid_seq to receptionist;
-GRANT update ON table "Bike857A".customer to receptionist;
-grant insert on table "Bike857A".customer_log to receptionist;
+--Tony Function Permissions add"C21403052", Receptionist
+GRANT USAGE ON schema "Bike857A" TO "C21481174";
+--GRANT execute ON function "Bike857A".addCustomer to "C21481174";--must run creation of add"C21403052" function and audit_"C21403052" function and trigger before
+GRANT select on table "Bike857A".customer to "C21481174";
+GRANT insert on table "Bike857A".customer to "C21481174";
+grant update on sequence customer_customerid_seq to "C21481174";
+GRANT update ON table "Bike857A".customer to "C21481174";
+grant insert on table "Bike857A".customer_log to "C21481174";
 
 --DJ Function Permissions addSupplier, addBikePart, addBikeModel
-GRANT USAGE ON "Bike857A" TO shopOwner;
-GRANT INSERT ON "Bike857A".bikeparts TO shopOwner;
-GRANT INSERT ON "Bike857A".suppliers TO shopOwner;
-GRANT INSERT ON "Bike857A".modelbike TO shopOwner;
+GRANT USAGE ON schema "Bike857A" TO "C21315413";
+GRANT INSERT ON "Bike857A".bikeparts TO "C21315413";
+GRANT INSERT ON "Bike857A".suppliers TO "C21315413";
+GRANT INSERT ON "Bike857A".modelbike TO "C21315413";
 
 --Aaron Function Permissions update_bike_repair_status
-grant usage on "Bike857A"
-grant select on table customerbike to mechanic;
-grant select on table bikeparts to mechanic;
-grant update on table customerbike to mechanic;
-grant insert on table repairdetails to mechanic;
-grant insert on table usedParts to mechanic;
+grant usage on schema "Bike857A" to "C21403052";
+grant select on table customerbike to "C21403052";
+grant select on table bikeparts to "C21403052";
+grant update on table customerbike to "C21403052";
+grant insert on table repairdetails to "C21403052";
+grant insert on table usedParts to "C21403052";
