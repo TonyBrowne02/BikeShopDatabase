@@ -75,6 +75,26 @@ create table customer_log(
     usernameCreator varchar(50),
     timeAdded date
 );
+
+create table model_bike_log(
+	modelid numeric,
+    modelname VARCHAR(50),
+    suppliers_supplierid INTEGER,
+    quantityinstock INTEGER,
+	usernameCreator varchar(50),
+	timeAdded date
+);
+
+CREATE TABLE customer_bike_log (
+    serialnumber serial,
+    repairstatus CHAR(1),
+    repairnumber VARCHAR(25),
+    customer_customerid INTEGER,
+    modelbike_modelid INTEGER,
+    repairdescription VARCHAR(255),
+    usernameCreator varchar(50),
+	timeAdded date
+);
 -- Add foreign keys to the tables
 ALTER TABLE bikeparts ADD FOREIGN KEY (suppliers_supplierid) REFERENCES suppliers (supplierid);
 ALTER TABLE customerbike ADD FOREIGN KEY (customer_customerid) REFERENCES customer (customerid);
