@@ -4,10 +4,10 @@ def insert_new_modelbike(modelname, suppliers_supplierid, quantityinstock):
     try:
         conn = psycopg2.connect(
             dbname="postgres",
-            user="owner",
-            password="owner_password",
-            host="localhost",
-            port="54321"
+            user="C21315413",
+            password=getpass.getpass(prompt='Password: '),
+            host="147.252.250.51",
+            port="5432"
         )
         cursor = conn.cursor()
 
