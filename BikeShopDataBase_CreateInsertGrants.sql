@@ -67,13 +67,13 @@ CREATE TABLE usedparts (
 
 --Create the customer_log table
 create table customer_log(
-	customerid numeric,
-	firstname varchar(25),
+    customerid numeric,
+    firstname varchar(25),
     lastname varchar(25),
     phonenumber varchar(10),
     email varchar(50),
-	usernameCreator varchar(50),
-	timeAdded date
+    usernameCreator varchar(50),
+    timeAdded date
 );
 -- Add foreign keys to the tables
 ALTER TABLE bikeparts ADD FOREIGN KEY (suppliers_supplierid) REFERENCES suppliers (supplierid);
@@ -176,7 +176,7 @@ VALUES ('C', 'Repair 005', 5, 5, 'Repair description 5');
 
 --Tony Function Permissions add"C21403052", Receptionist
 GRANT USAGE ON schema "Bike857A" TO "C21481174";
---GRANT execute ON function "Bike857A".addCustomer to "C21481174";--must run creation of add"C21403052" function and audit_"C21403052" function and trigger before
+--GRANT execute ON function "Bike857A".addCustomer to "C21481174";--must run creation of addCustomer function and audit_Customer function and trigger before
 GRANT select on table "Bike857A".customer to "C21481174";
 GRANT insert on table "Bike857A".customer to "C21481174";
 grant update on sequence customer_customerid_seq to "C21481174";
@@ -188,6 +188,7 @@ GRANT USAGE ON schema "Bike857A" TO "C21315413";
 GRANT INSERT ON "Bike857A".bikeparts TO "C21315413";
 GRANT INSERT ON "Bike857A".suppliers TO "C21315413";
 GRANT INSERT ON "Bike857A".modelbike TO "C21315413";
+--Grant execute on function "Bike857A".addBikeModel to "C21315413"; --must run creation of insert_new_modelbike and audit_modelbike function and trigger before
 
 --Aaron Function Permissions update_bike_repair_status
 grant usage on schema "Bike857A" to "C21403052";
@@ -196,3 +197,4 @@ grant select on table bikeparts to "C21403052";
 grant update on table customerbike to "C21403052";
 grant insert on table repairdetails to "C21403052";
 grant insert on table usedParts to "C21403052";
+--Grant execute on fucntion "Bike857A".update_bike_repair_status to "C21403052"; --must run creation of update_bike_repair_status and audit_customer_bike
